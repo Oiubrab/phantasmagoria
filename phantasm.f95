@@ -9,7 +9,7 @@ integer :: lines
 !open(unit=1,access='stream', form='unformatted',file='big_balls1.bmp')
 open(unit=1,file='big_balls1.bmp')
 
-do lines=1,100
+do lines=1,500
 	read(1,*) reader
 	print*,reader
 end do
