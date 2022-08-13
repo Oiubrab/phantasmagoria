@@ -2,9 +2,9 @@ program phantasm
 
 implicit none
 
-character(len=100) :: reader
+character(len=:),allocatable :: reader
 integer,dimension(100) :: reader2
-integer :: lines
+integer :: lines,reader_num
 
 !open(unit=1,access='stream', form='unformatted',file='big_balls1.bmp')
 open(unit=1,file='big_balls1.bmp')
