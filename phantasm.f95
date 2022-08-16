@@ -180,13 +180,19 @@ use rgbimage_m
 implicit none
 
 !character(len=:),allocatable :: reader
-character(len=100) :: reader,error
-integer,dimension(100) :: reader2
+integer,parameter :: leng=1000
+character(len=leng) :: reader,error
 integer :: lines,reader_num,letter,letter_num,io
 type(rgbimage) :: thing
 
 !open(unit=1,access='stream', form='unformatted',file='big_balls1.bmp')
-open(unit=1,file='test.bmp',iostat=io)
+open(unit=1,file='big_balls1.bmp',iostat=io)
+open(unit=2,file="test.txt")
+
+call thing%init(122,122)
+call thing%fill_image([1,2,3])
+call thing%set_pixel(1,1,[35,54,166])
+call thing%write("test.bmp")
 
 lines=0
 do
@@ -198,15 +204,17 @@ do
 		exit
 	end if
 	print*,""
-	do letter_num=1,100
-		write(*,'(I4)',advance='no') iachar(reader(letter_num:letter_num))
-!		read(reader(letter_num:letter_num),*) letter
+	do letter_num=1,leng
+		if (leng==letter_num) then
+			write(2,'(I4)') iachar(reader(letter_num:letter_num))
+		else
+			write(2,'(I4)',advance='no') iachar(reader(letter_num:letter_num))
+		end if
 	end do
 end do
 
 
 close(1)
-call thing%init(122,122)
-call thing%fill_image([1,2,3])
-call thing%write("test.bmp")
+close(2)
+
 end program
