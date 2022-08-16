@@ -197,12 +197,11 @@ do
 		print*,error
 		exit
 	end if
-	print*,trim(reader)
-!	print*,len(reader)
-!	do letter_num=1,2
-!		print*,reader(letter_num:letter_num)
-!!		read(reader(letter_num:letter_num),*) letter
-!	end do
+	print*,""
+	do letter_num=1,100
+		write(*,'(I4)',advance='no') iachar(reader(letter_num:letter_num))
+!		read(reader(letter_num:letter_num),*) letter
+	end do
 end do
 
 
