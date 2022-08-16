@@ -186,7 +186,7 @@ integer :: lines,reader_num,letter,letter_num,io
 type(rgbimage) :: thing
 
 !open(unit=1,access='stream', form='unformatted',file='big_balls1.bmp')
-open(unit=1,file='big_balls1.bmp',iostat=io)
+open(unit=1,file='test.bmp',iostat=io)
 
 lines=0
 do
