@@ -182,36 +182,26 @@ implicit none
 !character(len=:),allocatable :: reader
 integer,parameter :: leng=1000
 character(len=leng) :: reader,error
-integer :: lines,reader_num,letter,letter_num,io
+integer :: lines,reader_num,letter,letter_num,io,high,wide,eye,tide
 type(rgbimage) :: thing
 
 !open(unit=1,access='stream', form='unformatted',file='big_balls1.bmp')
 open(unit=1,file='big_balls1.bmp',iostat=io)
 open(unit=2,file="test.txt")
 
-call thing%init(122,122)
-call thing%fill_image([1,2,3])
-call thing%set_pixel(1,1,[35,54,166])
-call thing%write("test.bmp")
+!everything is fucking back to front
+high=122
+wide=236
 
-lines=0
-do
-	lines=lines+1
-	print*,lines
-	read(1,*,iostat=io,iomsg=error) reader
-	if (io/=0) then
-		print*,error
-		exit
-	end if
-	print*,""
-	do letter_num=1,leng
-		if (leng==letter_num) then
-			write(2,'(I4)') iachar(reader(letter_num:letter_num))
-		else
-			write(2,'(I4)',advance='no') iachar(reader(letter_num:letter_num))
-		end if
+call thing%init(wide,high)
+call thing%fill_image([1,66,3])
+do eye=1,high
+	do tide=1,wide,2
+			call thing%set_pixel(eye,tide,[35,54,166])
 	end do
 end do
+call thing%write("test.bmp")
+
 
 
 close(1)
